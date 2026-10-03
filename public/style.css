@@ -1,0 +1,192 @@
+body {
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.container {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.screen.active {
+    display: flex;
+}
+
+h1 { font-size: 2rem; color: #2c3e50; margin-bottom: 10px; }
+h2 { font-size: 1.5rem; color: #2c3e50; margin-bottom: 20px; }
+
+.description { color: #666; margin-bottom: 30px; }
+
+/* ジャンル選択コンテナ（横並び・中央寄せ） */
+.genre-container {
+    display: flex;
+    flex-direction: row; /* 横並びに戻す */
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.genre-container label {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #555;
+    white-space: nowrap; /* テキストの改行を防止 */
+}
+
+/* ドロップダウン本体（スッキリした高さに調整） */
+#genre-select {
+    width: 220px; /* 横並びでの適正幅 */
+    padding: 6px 32px 6px 12px; /* 上下パディングを減らしてスッキリ配置 */
+    font-size: 0.95rem;
+    color: #2c3e50;
+    background-color: #f8f9fa;
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    /* ブラウザ標準矢印の削除 */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* カスタム矢印 */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%233498db' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 14px;
+}
+
+/* ホバー＆フォーカス効果 */
+#genre-select:hover {
+    border-color: #3498db;
+    background-color: #ffffff;
+}
+
+#genre-select:focus {
+    border-color: #3498db;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+}
+
+.primary-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.primary-btn:hover { background-color: #2980b9; }
+
+/* 共通ボックス設定 */
+.phase-badge {
+    background-color: #e74c3c;
+    color: white;
+    padding: 4px 16px;
+    border-radius: 15px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.story-box {
+    background: #f8f9fa;
+    border-left: 5px solid #3498db;
+    padding: 20px;
+    border-radius: 4px;
+    font-size: 1.05rem;
+    line-height: 1.8;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 25px;
+    white-space: pre-wrap;
+}
+
+.options-container { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+
+.option-label { font-weight: bold; color: #555; margin-bottom: 5px; }
+
+.option-btn {
+    background: white;
+    border: 2px solid #3498db;
+    color: #3498db;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+}
+
+.option-btn:hover {
+    background: #3498db;
+    color: white;
+}
+
+/* 結果画面 */
+.full-story-box {
+    background: #fff9e6;
+    border: 1px solid #ffe0b2;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: left;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    width: 100%;
+    box-sizing: border-box;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.story-section { margin-bottom: 15px; }
+.story-section h3 { margin: 0 0 5px 0; font-size: 1rem; color: #e67e22; }
+
+/* ローディング表示 */
+.loading-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+}
+
+.spinner {
+    width: 40px; height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }

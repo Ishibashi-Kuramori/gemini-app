@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物語を作ろう</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 1. タイトル画面 -->
+        <section id="title-screen" class="screen active">
+            <h1>物語を作ろう</h1>
+            <p class="description">AIと一緒に、世界にひとつだけの「起承転結」の物語を作り上げましょう。</p>
+
+            <!-- 追加: ジャンル選択プルダウン -->
+            <div class="genre-container">
+                <label for="genre-select">物語のジャンル：</label>
+                    <select id="genre-select">
+                    <option value="ファンタジー">ファンタジー</option>
+                    <option value="SF">SF・近未来</option>
+                    <option value="恋愛">恋愛・ラブコメ</option>
+                    <option value="ミステリー">ミステリー・サスペンス</option>
+                    <option value="ホラー">ホラー・怪談</option>
+                    <option value="コメディ">日常・コメディ</option>
+                </select>
+            </div>
+
+            <button id="start-btn" class="primary-btn">物語をはじめる</button>
+        </section>
+
+        <!-- 2. 選択画面 (起・承・転) -->
+        <section id="game-screen" class="screen">
+            <div class="phase-badge"><span id="current-phase">起</span>の章</div>
+            <div id="story-box" class="story-box"></div>
+            
+            <div id="options-container" class="options-container">
+                <p class="option-label">次の展開を選んでください：</p>
+                <button class="option-btn" data-index="0"></button>
+                <button class="option-btn" data-index="1"></button>
+                <button class="option-btn" data-index="2"></button>
+            </div>
+        </section>
+
+        <!-- 3. 結果画面 (起承転結のまとめ) -->
+        <section id="result-screen" class="screen">
+            <h2>完成した物語</h2>
+            <div id="full-story-box" class="full-story-box"></div>
+            <button id="restart-btn" class="primary-btn">タイトルへ戻る</button>
+        </section>
+
+        <!-- ローディング表示 -->
+        <div id="loading" class="loading-overlay" style="display: none;">
+            <div class="spinner"></div>
+            <p id="loading-text">物語を考えています...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
